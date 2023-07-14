@@ -11,8 +11,8 @@ packages = [
 
 [tool.poetry.dependencies]
 python = '^3.8'
-jax = '^0.4.6'
-jaxlib = '^0.4.6'
+jax = '^0.3'
+jaxlib = '^0.3'
 qax = '^0.2.0'
 
 [tool.poetry.dev-dependencies]

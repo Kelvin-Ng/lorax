@@ -1,9 +1,10 @@
 import jax
 import jax.numpy as jnp
-from jax.tree_util import tree_map_with_path, DictKey, SequenceKey
 
 import optax
 import qax
+
+from qax.common.jax_tree_util import tree_map_with_path
 
 from .constants import LORA_FREEZE, LORA_FULL
 from .transform import LoraWeight
@@ -42,7 +43,7 @@ def init_lora(param_tree, spec, rng, stddev=0.01, dtype=jnp.float32, alpha=1., i
         b = jax.random.normal(rng, (*window_shape, in_channels, spec_val), dtype=param.dtype) * stddev
         return LoraWeight(param, a, b, alpha=alpha)
 
-    return jax.tree_util.tree_map_with_path(get_param, param_tree, spec, is_leaf=is_leaf)
+    return tree_map_with_path(get_param, param_tree, spec, is_leaf=is_leaf)
 
 def simple_spec(params, decision_fn=None, tune_vectors=False, is_leaf=None):
     """
